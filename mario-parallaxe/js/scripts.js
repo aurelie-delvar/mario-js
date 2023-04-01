@@ -11,6 +11,7 @@ let decalage = 0;
 window.onload = () => {
     document.addEventListener("keydown", marcher);
     document.addEventListener("keyup", stopper);
+    document.addEventListener("keyup", sauter);
 }
 
 /**
@@ -23,12 +24,14 @@ function marcher(event) {
         case "ArrowLeft":
             mario.classList.add("mario-gauche");
             mario.classList.remove("mario-droite");
+            mario.classList.remove("mario-saute");
             parallaxe();
             decalage ++;
             break;
         case "ArrowRight":
             mario.classList.add("mario-droite");
             mario.classList.remove("mario-gauche");
+            mario.classList.remove("mario-saute");
             parallaxe();
             decalage --;
             break;
@@ -39,10 +42,18 @@ function marcher(event) {
  * Cette fonction arrête Mario
  * 
  */
-function stopper(event) {
+function stopper() {
 
     mario.classList.remove("mario-gauche");
     mario.classList.remove("mario-droite");
+
+}
+
+function sauter(event) {
+
+    if(event.key == " " || event.key == "spacebar") {
+        mario.classList.add("mario-saute");
+    }
 
 }
 
